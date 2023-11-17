@@ -15,7 +15,7 @@ import com.ms.email.services.EmailService;
 
 @RestController
 public class EmailController {
-//ms-email no google
+//ms-email no google, senha no properties
     @Autowired
     EmailService emailService;
 
