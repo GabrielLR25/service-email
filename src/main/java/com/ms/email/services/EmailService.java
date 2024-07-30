@@ -2,6 +2,7 @@ package com.ms.email.services;
 
 import com.ms.email.enums.StatusEmail;
 import com.ms.email.models.EmailModel;
+import com.ms.email.repositories.EmailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,11 +11,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import com.ms.email.repositories.EmailRepository;
-
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class EmailService {
@@ -26,7 +24,7 @@ public class EmailService {
 	private JavaMailSender emailSender;
 
 
-	public EmailModel sendEmail(EmailModel emailModel) {
+	public EmailModel sendEmail(EmailModel emailModel) throws MailException{
 
 		emailModel.setSendDateEmail(LocalDateTime.now());
 		try{
@@ -52,7 +50,9 @@ public class EmailService {
 		return emailRepository.findAll(pageable);
 	}
 
-	public Optional<EmailModel> findById(UUID emailId){
-		return emailRepository.findById(emailId);
+	public Optional<EmailModel> findByStatus(StatusEmail statusEmail){
+		return emailRepository.findByStatus(statusEmail);
 	}
+
+
 }
