@@ -1,8 +1,7 @@
-package com.ms.email.controlleres;
+package com.ms.email.controllers;
 
 import com.ms.email.dtos.EmailDto;
 import com.ms.email.enums.StatusEmail;
-import com.ms.email.models.EmailModel;
 import com.ms.email.services.EmailService;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,9 +9,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 @RunWith(SpringRunner.class)
 public class EmailControllerTest {

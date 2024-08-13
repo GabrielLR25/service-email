@@ -1,4 +1,4 @@
-package com.ms.email.controlleres;
+package com.ms.email.controllers;
 
 import com.ms.email.dtos.EmailDto;
 import com.ms.email.enums.StatusEmail;
@@ -44,12 +44,6 @@ public class EmailController {
 
     @GetMapping("/all-emails")
     public ResponseEntity<Page<EmailModel>> getEmails(@PageableDefault(page = 0, size = 5, sort = "emailId") Pageable pageable){
-//        logger.trace("TRACE");
-//        logger.debug("DEBUG");
-//        logger.info("INFO");
-//        logger.warn("WARN");
-//        logger.error("ERROR");
-//        logger.fatal("FATAL");
         return new ResponseEntity<>(emailService.findAll(pageable), HttpStatus.OK);
     }
 
