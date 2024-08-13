@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class EmailService {
@@ -24,7 +25,7 @@ public class EmailService {
 	private JavaMailSender emailSender;
 
 
-	public EmailModel sendEmail(EmailModel emailModel) throws MailException{
+	public EmailModel sendEmail(EmailModel emailModel) throws MailException {
 
 		emailModel.setSendDateEmail(LocalDateTime.now());
 		try{
@@ -38,10 +39,10 @@ public class EmailService {
 			emailModel.setStatusEmail(StatusEmail.SENT);
 
 		} catch (MailException e) {
+			e.printStackTrace();
 			emailModel.setStatusEmail(StatusEmail.ERROR);
 
 		} finally {
-
 			return emailRepository.save(emailModel);
 		}
 	}
@@ -54,5 +55,8 @@ public class EmailService {
 		return emailRepository.findByStatus(statusEmail);
 	}
 
+	public Optional<EmailModel> findById(UUID id){
+		return emailRepository.findById(id);
+	}
 
 }
