@@ -1,6 +1,7 @@
 package com.ms.email.controllers;
 
-import com.ms.email.dtos.EmailDto;
+import com.ms.email.dtos.RequestEmailDto;
+import com.ms.email.dtos.ResponseEmailDto;
 import com.ms.email.enums.StatusEmail;
 import com.ms.email.models.EmailModel;
 import com.ms.email.services.EmailService;
@@ -28,11 +29,13 @@ public class EmailController {
     Logger logger = LogManager.getLogger(EmailController.class);
 
     @PostMapping("/sending-email")
-    public ResponseEntity<EmailModel> sendingEmail(@RequestBody @Valid EmailDto emailDto){
+    public ResponseEntity<ResponseEmailDto> sendingEmail(@RequestBody @Valid RequestEmailDto emailDto){
         EmailModel emailModel = new EmailModel();
         BeanUtils.copyProperties(emailDto, emailModel);
+        ResponseEmailDto responseEmailDto = new ResponseEmailDto();
         emailService.sendEmail(emailModel);
-        return new ResponseEntity<>(emailModel, HttpStatus.CREATED);
+        BeanUtils.copyProperties(emailModel, responseEmailDto);
+        return new ResponseEntity<>(responseEmailDto, HttpStatus.CREATED);
 
     }
 
@@ -43,7 +46,7 @@ public class EmailController {
     }
 
     @GetMapping("/all-emails")
-    public ResponseEntity<Page<EmailModel>> getEmails(@PageableDefault(page = 0, size = 5, sort = "emailId") Pageable pageable){
+    public ResponseEntity<Page<EmailModel>> getEmails(@PageableDefault(page = 0, size = 5, sort = "id") Pageable pageable){
         return new ResponseEntity<>(emailService.findAll(pageable), HttpStatus.OK);
     }
 

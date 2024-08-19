@@ -1,6 +1,6 @@
 package com.ms.email.controllers;
 
-import com.ms.email.dtos.EmailDto;
+import com.ms.email.dtos.RequestEmailDto;
 import com.ms.email.enums.StatusEmail;
 import com.ms.email.services.EmailService;
 import org.junit.Before;
@@ -24,7 +24,7 @@ public class EmailControllerTest {
 
     @Test
     public void sendingEmail() {
-        EmailDto emailDto = createEmailDTO();
+        RequestEmailDto emailDto = createEmailDTO();
         emailController.sendingEmail(emailDto);
     }
 
@@ -34,8 +34,8 @@ public class EmailControllerTest {
         emailController.getEmailByStatus(statusEmail);
     }
 
-    private EmailDto createEmailDTO(){
-        EmailDto emailDto = EmailDto.builder()
+    private RequestEmailDto createEmailDTO(){
+        RequestEmailDto emailDto = RequestEmailDto.builder()
                 .ownerRef("Teste")
                 .emailFrom("Teste")
                 .emailTo("Teste")

@@ -1,8 +1,10 @@
 package com.ms.email.services;
 
+import com.ms.email.dtos.ResponseEmailDto;
 import com.ms.email.enums.StatusEmail;
 import com.ms.email.models.EmailModel;
 import com.ms.email.repositories.EmailRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -58,5 +60,12 @@ public class EmailService {
 	public Optional<EmailModel> findById(UUID id){
 		return emailRepository.findById(id);
 	}
+
+//	public ResponseEmailDto convertEmailModelToResponse(EmailModel model){
+//		EmailModel emailModel = new EmailModel();
+//		ResponseEmailDto responseEmailDto = new ResponseEmailDto();
+//		BeanUtils.copyProperties(emailModel, responseEmailDto);
+//		return responseEmailDto;
+//	}
 
 }
